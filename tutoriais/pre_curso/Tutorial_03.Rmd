@@ -82,7 +82,7 @@ Voltando à função *read.table*, vamos examinar os argumentos seguintes a *fil
 Para facilitar nossa vida, vamos usar como argumento "file" o endereço dos dados no repositório do curso. O primeiro arquivo está no enderço que guardaremos em "file1".
 
 ```{r}
-file1 <- "https://raw.githubusercontent.com/thiagomeireles/cebraplab_texto_como_dados_21/master/dados/bf_amostra_hv.csv"
+file1 <- "https://raw.githubusercontent.com/thiagomeireles/cebraplab_captura_2021/main/dados/bf_amostra_hv.csv"
 ```
 
 Esse arquivo contém cabeçalho, ou seja, a primeira linha traz o nome das colunas. Por esta razão, informaremos "header = T". Ignore por hora o argumento "sep".
@@ -108,7 +108,7 @@ str(dados)
 Vamos observar agora uma versão dos dados que não contém a primeira linha como nome das variáveis. Os dados estão no url armazenado em file2:
 
 ```{r}
-file2 <- "https://raw.githubusercontent.com/thiagomeireles/cebraplab_texto_como_dados_21/master/dados/bf_amostra_nv.csv"
+file2 <- "https://raw.githubusercontent.com/thiagomeireles/cebraplab_captura_2021/main/dados/bf_amostra_nv.csv"
 ```
 
 Como já havíamos visto, quando não há cabeçalho na primeira linha, os nomes são inseridos automaticamente:
@@ -133,10 +133,10 @@ Não há muita graça em observar os exemplos com separadores diferente, mas vej
 
 ```{r}
 # Ponto e virgula
-file3 <- "https://raw.githubusercontent.com/thiagomeireles/cebraplab_texto_como_dados_21/master/dados/bf_amostra_hp.csv"
+file3 <- "https://raw.githubusercontent.com/thiagomeireles/cebraplab_captura_2021/main/dados/bf_amostra_hp.csv"
 dados <- read.table(file3, header = T, sep = ";")
 
-file4 <- "https://raw.githubusercontent.com/thiagomeireles/cebraplab_texto_como_dados_21/master/dados/bf_amostra_ht.csv"
+file4 <- "https://raw.githubusercontent.com/thiagomeireles/cebraplab_captura_2021/main/dados/bf_amostra_ht.csv"
 dados <- read.table(file4, header = T, sep = "\t")
 ```
 
@@ -386,11 +386,11 @@ Vamos usar como exemplo o [Latinobarômetro 2015](http://www.latinobarometro.org
 
 ```{r}
 # SPSS
-download.file("https://raw.githubusercontent.com/thiagomeireles/cebraplab_texto_como_dados_21/master/dados/F00004529-Latinobarometro_2015_sav.zip", "latino2015_sav.zip")
+download.file("https://raw.githubusercontent.com/thiagomeireles/cebraplab_captura_2021/main/dados/F00004529-Latinobarometro_2015_sav.zip", "latino2015_sav.zip")
 unzip("latino2015_sav.zip")
 
 # STATA
-download.file("https://raw.githubusercontent.com/thiagomeireles/cebraplab_texto_como_dados_21/master/dados/F00004530-Latinobarometro_2015_dta.zip",  "latino2015_dta.zip")
+download.file("https://raw.githubusercontent.com/thiagomeireles/cebraplab_captura_2021/main/dados/F00004530-Latinobarometro_2015_dta.zip",  "latino2015_dta.zip")
 unzip("latino2015_dta.zip")
 ```
 
@@ -423,7 +423,7 @@ Há critérios de conversão de variáveis categóricas, rótulos e etc, adotado
 Faça download do arquivo do Latinobarômetro 2015 para formato R. Você verá que o arquivo tem a extensão .RData. Este é o formato de dados do R? Sim e não.
 
 ```{r}
-download.file("https://raw.githubusercontent.com/thiagomeireles/cebraplab_texto_como_dados_21/master/dados/F00004532-Latinobarometro_2015_r.zip",
+download.file("https://raw.githubusercontent.com/thiagomeireles/cebraplab_captura_2021/main/dados/F00004532-Latinobarometro_2015_r.zip",
               "latino2015_rdata.zip")
 unzip("latino2015_rdata.zip")
 ```
