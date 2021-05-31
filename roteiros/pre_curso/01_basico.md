@@ -20,7 +20,7 @@ Divirtam-se! =)
 
 [Tutorial Pré-Curso III: Abindo dados em R](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_03.md) ou na [versão Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_03.Rmd)
 
-[Tutorial Pré-Curso IV: Operadores relacionais]https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_04.md) ou na [versão Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_04.Rmd)
+[Tutorial Pré-Curso IV: Operadores relacionais](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_04.md) ou na [versão Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_04.Rmd)
 
 [Tutorial Pré-Curso V: Manipulação de dados com *dplyr*](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_05.md) ou na [versão Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_05.Rmd)
 
