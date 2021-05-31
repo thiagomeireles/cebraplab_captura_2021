@@ -15,7 +15,7 @@ Muitas ações necessárias para atividades diversas executadas não fazem parte
 
 Nesse primeiro momento, vamos instalar uma de uma biblioteca chamada *tidyverse*, falaremos um pouco mais dela depois. Assim, nossa primeira ação é realizar o processo de instalação de uma biblioteca. Para isso, basta executarmos o comando abaixo:
 
-```{r, eval=TRUE}
+```{r, eval=FALSE}
 install.packages("tidyverse")
 ```
 
@@ -47,7 +47,7 @@ Este tutorial trata da *dplyr*, gramática mais popular para R nos últimos anos
 
 ```{r}
 library(readr)
-saques_amostra_201701 <- read_delim("https://raw.githubusercontent.com/thiagomeireles/cebraplab_texto_como_dados_21/master/dados/saques_amostra_201701.csv",
+saques_amostra_201701 <- read_delim("https://raw.githubusercontent.com/thiagomeireles/cebraplab_captura_2021/main/dados/saques_amostra_201701.csv",
                                     delim = ";", escape_double = FALSE, 
                                     col_types = cols(`Valor Parcela` = col_character()))
 
@@ -99,7 +99,7 @@ saques_amostra_201701 <- saques_amostra_201701 %>%
 
 Se observou a resolução do exercício anterior, verá que tem uma sintaxe ligeiramente diferente da que utilizamos para realização da mesma tarefa de renomeação de variáveis. Vamos observar a diferença: 
 
-```{r, eval = F}
+```{r, eval = TRUE}
 saques_amostra_201701 <- saques_amostra_201701 %>%
   rename(uf = UF, munic = `Nome Município`)
 ```
@@ -113,7 +113,8 @@ Como falamos no tutorial anterior, existem variáveis que são claramente dispen
 Vamos testar a seleção utilizando apenas as variáveis que já havíamos renomeado.
 
 ```{r}
-saques_amostra2 <- select(saques_amostra_201701, uf, munic, cod_munic, nome, valor, mes, data_saque)
+saques_amostra2 <- select(saques_amostra_201701, 
+                          uf, munic, cod_munic, nome, valor, mes, data_saque)
 ```
 
 ou usando o operador %>%, chamado *pipe*,
@@ -136,7 +137,7 @@ Use o comando _rm_ para deletar a base de dados e abra novamente. Vejamos agora 
 ```{r, include=FALSE}
 rm(saques_amostra_201701, saques_amostra2)
 
-saques_amostra_201701 <- read_delim("https://raw.githubusercontent.com/thiagomeireles/cebraplab_texto_como_dados_21/master/dados/saques_amostra_201701.csv",
+saques_amostra_201701 <- read_delim("https://raw.githubusercontent.com/thiagomeireles/cebraplab_captura_2021/main/dados/saques_amostra_201701.csv",
                                     delim = ";", escape_double = FALSE, 
                                     col_types = cols(`Valor Parcela` = col_character()))
 ```
