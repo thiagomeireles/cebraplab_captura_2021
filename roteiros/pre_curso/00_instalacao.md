@@ -1,4 +1,4 @@
-# [Cebrap.lab] Curso de Programação em R: instalação do R e RStudio
+# [Cebrap.lab 2021] Captura de dados com R: instalação do R e RStudio
 
 
 Antes do curso, é esperado que todos os alunos instalem o R e o RStudio em suas máquinas. 
