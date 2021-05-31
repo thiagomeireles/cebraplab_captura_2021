@@ -1,6 +1,6 @@
 # Tutorial Pré-Curso I: data_frames
 
-# Os *data_frames*
+## Os *data_frames*
 
 Uma característica distintiva da linguagem de programação R é ter sido desenvolvida para a análise de dados. E quando pensamos em análise de dados, a protagonista do show é a *base de dados* ou, como vamos conhecer a partir de agora, *data_frame*. Começaremos daqui antes de seguir para aspectos mais básicos da linguagem, como quais são os tipos de objetos mais comuns.
 
@@ -348,7 +348,7 @@ R é uma linguagem extremamente flexível quanto ao formato de dados que podem s
 
 Com o pacote *foreign* abriremos arquivos produzidos por outros softwares -- como Stata e SPSS. Podemos também conectar o R a sistemas de gerenciamento de bancos de dados relacionais (SGBD), como o SQL Server. Finalmente, podemos receber via web arquivos em formato XML ou Json e transformá-los em *data frames* em poucos passos.
 
-Vamos começar com o exemplo simples. Baixe os dados com resultados eleitorais (votação nominal por município e zona) do Acre em 2014 disponíveis [aqui](https://raw.githubusercontent.com/thiagomeireles/cebraplab_texto_como_dados_21/master/dados/votacao_candidato_munzona_2014_AC.txt) (clique em "Save link as" e faça o download ou vá [aqui](https://github.com/thiagomeireles/cebraplab_texto_como_dados_21/blob/master/dados/votacao_candidato_munzona_2014_AC.txt) e clique em download). Estes dados são provenientes do [Repositório de Dados Eleitorais](http://www.tse.jus.br/eleicoes/estatisticas/repositorio-de-dados-eleitorais) do TSE. O Tribunal disponibiliza para cada ano eleitoral arquivos por UF em formato de texto (.txt) e numa pasta comprimida em formato .zip.
+Vamos começar com o exemplo simples. Baixe os dados com resultados eleitorais (votação nominal por município e zona) do Acre em 2014 disponíveis [aqui](https://raw.githubusercontent.com/thiagomeireles/cebraplab_captura_2021/main/dados/votacao_candidato_munzona_2014_AC.txt) (clique em "Save link as" e faça o download ou vá [aqui](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/dados/votacao_candidato_munzona_2014_AC.txt) e clique em download. Estes dados são provenientes do [Repositório de Dados Eleitorais](http://www.tse.jus.br/eleicoes/estatisticas/repositorio-de-dados-eleitorais) do TSE. O Tribunal disponibiliza para cada ano eleitoral arquivos por UF em formato de texto (.txt) e numa pasta comprimida em formato .zip.
 
 Obs: se você tiver algum problema com o download, encoding, ou outro, pode ir direto ao Repositório e fazer o download de lá.
 
@@ -383,7 +383,7 @@ Outra opção é acessar o arquivo diretamente pelo link do repositório do curs
 
 ```{r}
 votacao_candidato_munzona_2014_AC <- read.table(
-  "https://raw.githubusercontent.com/thiagomeireles/cebraplab_texto_como_dados_21/master/dados/votacao_candidato_munzona_2014_AC.txt",
+  "https://raw.githubusercontent.com/thiagomeireles/cebraplab_captura_2021/main/dados/votacao_candidato_munzona_2014_AC.txt",
   sep = ";",
   fileEncoding="latin1")
 ```
