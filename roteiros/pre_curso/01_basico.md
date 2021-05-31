@@ -14,15 +14,15 @@ Divirtam-se! =)
 
 [Tutorial Pré-Curso 0: vídeo sobre o RStudio](https://drive.google.com/file/d/1i_-SrgtYQ_Ig_m80DfzEQw78RHQtkLeY/view?pli=1)
 
-[Tutorial Pré-Curso I: data_frames](https://github.com/thiagomeireles/cebraplab_texto_como_dados_21/blob/master/tutoriais/pre_curso/Tutorial_01.md) ou na [versão Rmd](https://github.com/thiagomeireles/cebraplab_texto_como_dados_21/blob/master/tutoriais/pre_curso/Tutorial_01.Rmd)
+[Tutorial Pré-Curso I: data_frames](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_01.md) ou na [versão Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_01.Rmd)
 
-[Tutorial Pré-Curso II: Entendendo o ambiente e os objetos](https://github.com/thiagomeireles/cebraplab_texto_como_dados_21/blob/master/tutoriais/pre_curso/Tutorial_02.md) ou na [versão Rmd](https://github.com/thiagomeireles/cebraplab_texto_como_dados_21/blob/master/tutoriais/pre_curso/Tutorial_02.Rmd)
+[Tutorial Pré-Curso II: Entendendo o ambiente e os objetos](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_02.md) ou na [versão Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_02.Rmd)
 
-[Tutorial Pré-Curso III: Abindo dados em R](https://github.com/thiagomeireles/cebraplab_texto_como_dados_21/blob/master/tutoriais/pre_curso/Tutorial_03.md) ou na [versão Rmd](https://github.com/thiagomeireles/cebraplab_texto_como_dados_21/blob/master/tutoriais/pre_curso/Tutorial_03.Rmd)
+[Tutorial Pré-Curso III: Abindo dados em R](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_03.md) ou na [versão Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_03.Rmd)
 
-[Tutorial Pré-Curso IV: Operadores relacionais](https://github.com/thiagomeireles/cebraplab_texto_como_dados_21/blob/master/tutoriais/pre_curso/Tutorial_04.md) ou na [versão Rmd](https://github.com/thiagomeireles/cebraplab_texto_como_dados_21/blob/master/tutoriais/pre_curso/Tutorial_04.Rmd)
+[Tutorial Pré-Curso IV: Operadores relacionais]https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_04.md) ou na [versão Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_04.Rmd)
 
-[Tutorial Pré-Curso V: Manipulação de dados com *dplyr*](https://github.com/thiagomeireles/cebraplab_texto_como_dados_21/blob/master/tutoriais/pre_curso/Tutorial_05.md) ou na [versão Rmd](https://github.com/thiagomeireles/cebraplab_texto_como_dados_21/blob/master/tutoriais/pre_curso/Tutorial_05.Rmd)
+[Tutorial Pré-Curso V: Manipulação de dados com *dplyr*](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_05.md) ou na [versão Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/pre_curso/Tutorial_05.Rmd)
 
 Os dois primeiros tutoriais apresentam a linguagem e os objetos que podemos manipular, e são essenciais. Já o terceiro tutorial apresenta algumas formas de abertura de dados externos ao R. Estes são opcionais.
 
