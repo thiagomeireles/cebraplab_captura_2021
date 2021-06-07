@@ -49,10 +49,6 @@ Por exemplo, se quisermos organizar a informação sobre um indivíduo que assum
 
 Exercício (difícil): se tivessemos que representar estes dados em um banco de dados (data frame), como seria? Quantas linhas teria? Quantas colunas teria?
 
-Veja no link abaixo um exemplo de arquivo XML proveniente do Web Service da Câmara dos Deputados:
-
-<http://www.camara.gov.br/SitCamaraWS/Deputados.asmx/ObterDetalhesDeputado?ideCadastro=141428&numLegislatura=>
-
 Abra agora a página inicial da [Folha de São Paulo](http://www.folha.uol.com.br/). Posicione o mouse em qualquer elemento da página e, com o botão direito, selecione "Inspecionar" (varia de navegador para navegador, mas recomendo utilizar o Chrome para esta tarefa a despeito da sua preferência). Você verá o código HTML da página.
 
 Sem precisar observar muito, é fácil identificar que o código HTML da Folha se assemelha ao nosso breve exemplo de arquivo XML, ainda que o conteúdo seja diferente. Não por acaso: HTML é um tipo de XML. Em outra palavras, toda página de internet está em um formato de dados conhecido e, como veremos a seguir, pode ser re-organizado facilmente.
