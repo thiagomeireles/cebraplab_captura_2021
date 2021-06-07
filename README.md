@@ -66,40 +66,40 @@ Os participantes, ao fim do curso, serão capazes de:
 
 Todas os dias de curso terão roteiros a cumprir. Pouco antes de cada encontro, as linhas abaixo serão preenchidas com links com as descrições do que esperamos em cada dia de curso e como o faremos.
 
-[Dia 1]() - O básico da raspagem de dados
+[Dia 1](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/roteiros/dia_01.md) - O básico da raspagem de dados
 
-[Dia 2]() - Desafios de raspagem de dados
+[Dia 2](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/roteiros/dia_02.md) - Desafios de raspagem de dados
 
-[Dia 3]() - Introdução à manipulação de textos como dados
+[Dia 3](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/roteiros/dia_03.md) - Introdução à manipulação de textos como dados
 
-[Dia 4]() - A pesquisa quantitativa com texto
+[Dia 4](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/roteiros/dia_04.md) - A pesquisa quantitativa com texto
 
-[Dia 5]() - *Text mining* em R
+[Dia 5](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/roteiros/dia_05.md) - *Text mining* em R
 
 
 ### Tutoriais
 
 Os links para os tutoriais estarão abaixo antes de cada aula.
 
-[Tutorial 1](): Páginas com tabelas
+[Tutorial 1](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_01.md): Páginas com tabelas. Versão [Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_01.Rmd)
 
-[Tutorial 2](): Realizar a extração de qualquer conteúdo de uma página utilizando os "caminhos" dos elementos da página no código html - Introdução ao XPath
+[Tutorial 2](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_02.md): Realizar a extração de qualquer conteúdo de uma página utilizando os "caminhos" dos elementos da página no código html - Introdução ao XPath. Versão [Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_02.Rmd)
 
-[Tutorial 3](): Extrair informações de uma sequência páginas (ex. portal de notícias) - Captura de notícias da Folha
+[Tutorial 3](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_03.md): Extrair informações de uma sequência páginas (ex. portal de notícias) - Captura de notícias da Folha. Versão [Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_03.Rmd)
 
-[Tutorial 4](): Captura de notícias do Data Folha
+[Tutorial 4](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_04.md): Captura de notícias do DataFolha\. Versão [Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_04.Rmd) 
 
-[Tutorial 5](): Mineração de Texto - pacote *stringr*
+[Tutorial 5](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_05.md): Mineração de Texto - pacote *stringr*. Versão [Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_05.Rmd)
+ª
+[Tutorial 6](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_06.md): Mineração de Texto - pacote *tm*. Versão [Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_06.Rmd)
 
-[Tutorial 6](): Mineração de Texto - pacote *tm*
+[Tutorial 7](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_07.md): Mineração de Texto - pacote *tidytext*. Versão [Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_07.Rmd)
 
-[Tutorial 7](): Mineração de Texto - pacote *tidytext*
-
-[Tutorial 8]() Texto como dados e o pacote *quanteda*
+[Tutorial 8](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_08.md) Texto como dados e o pacote *quanteda*. Versão [Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_08.Rmd)
 
 ## Referências
 
-- Grolemund, Garrett (2014). Hands-On Programming with R. Ed: O'Reilly Media. Não distribuído gratuitamente. Informações no site da editora [aqui](http://shop.oreilly.com/product/0636920028574.do)
-- Wichkam, Hadley e Grolemund, Garrett (2016). R for Data Science. Ed: O'Reilly Media. Disponível gratuitamente Disponível gratuitamente [aqui](http://r4ds.had.co.nz/data-visualisation.html)
+- Grolemund, Garrett (2014). Hands-On Programming with R. Ed: O'Reilly Media. Disponível gratuitamente [aqui](https://rstudio-education.github.io/hopr/)
+- Wichkam, Hadley e Grolemund, Garrett (2016). R for Data Science. Ed: O'Reilly Media. Disponível gratuitamente [aqui](http://r4ds.had.co.nz/data-visualisation.html)
 - Wichkam, Hadley (2014). Advanced R. Ed: Chapman and Hall/CRC. Disponível gratuitamente Disponível gratuitamente [aqui](http://adv-r.had.co.nz/)
-- Gillespie, Colin e Lovelace, Robin (2016). Efficient R programming. Ed: O'Reilly Media. Disponível gratuitamente Disponível gratuitamente [aqui](https://csgillespie.github.io/efficientR/)
+- Gillespie, Colin e Lovelace, Robin (2016). Efficient R programming. Ed: O'Reilly Media. Disponível gratuitamente [aqui](https://csgillespie.github.io/efficientR/)
