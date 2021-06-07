@@ -30,7 +30,7 @@ Hoje é a aula mais importante do curso, na qual trataremos de uma situação ma
 
 [Lista de presença](https://docs.google.com/spreadsheets/d/1yW4pNWKZ-o5XxPG7q8fJI-hkQ42vUbBPovsIOK3jOpk/edit#gid=764662017)
 
-[Slides do primeiro encontro]()
+[Slides do primeiro encontro](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/slides/cebraplab___Captura_de_dados_com_R__Dia_1_.pdf)
 
 ### RMarkdown
 
