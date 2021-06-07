@@ -1,0 +1,333 @@
+---
+title: "Tutorial 3: Raspando notícias da Folha"
+author: "Thiago Meireles"
+date: "`r format(Sys.time(), '%d/%m/%y')`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, results='hide')
+```
+
+Nas atividades anteriores utilizamos as ferramentas básicas de captura de dados disponíveis na biblioteca *rvest*. Primeiro, vimos como capturar várias tábelas em uma página em formato HTML de uma só vez. Depois, aprendemos como um documento XML está estruturado e que podemos a extrair com precisão os conteúdos de tags e os valores dos atributos das tags de páginas escritas em HTML.
+
+Neste tutorial vamos colocar tudo em prática e construir um banco de dados de notícias. O nosso exemplo será o conjunto de notícias publicadas no site da Folha de São Paulo.
+
+Clique no [link](https://search.folha.uol.com.br/search?q=coronavirus&site=todos&periodo=todos&results_count=10000&search_time=0%2C025&url=https%3A%2F%2Fsearch.folha.uol.com.br%2Fsearch%3Fq%3Dcoronavirus%26site%3Dtodos%26periodo%3Dtodos&sr=) caso não lembre como está a estruturada a busca no sistema da Folha.
+
+## Raspando uma notícia no site da Folha de São Paulo
+
+Antes de começar, vamos chamar a biblioteca *rvest* para tornar suas funções disponíveis em nossa sessão do R. Na carona, vamos chamar também as bibliotecas *dplyr* e *stringr.*
+
+```{r}
+library(rvest)
+library(dplyr)
+library(stringr)
+```
+
+Nossa primeira tarefa será escolher uma única notícia (a primeira da busca, por exemplo), e extrair dela 4 informações de interesse: o título da notícia; o subtítulo da notícia; a data e hora da notícia; e o texto da notícia.
+
+O primeiro passo é criar um objeto com endereço URL da notícia e outro que contenha o código HTML da página:
+
+```{r}
+url_noticia <- "https://www1.folha.uol.com.br/equilibrioesaude/2021/05/durante-pandemia-de-covid-19-cardiologista-aplica-metodo-antifumo-que-associa-medicacao-a-castigo.shtml"
+pagina <- read_html(url_noticia)
+```
+
+Pronto! Agora temos um objeto adequadamente identificado como XML pelo R. Com o objeto XML preparado e representando a página com a qual estamos trabalhando, vamos à caça das informações que queremos.
+
+Volte para a página da notícia. Procure o título da notícia e examine-o, inspencionando o código clicando com o botão direito do mouse e selecionando "Inspecionar". Note o que encontramos:
+
+```{xml}
+<h1 class="c-content-head__title" itemprop="headline">== "Durante pandemia de Covid-19, cardiologista aplica método antifumo que associa medicação a 'castigo'"</h1>
+```
+
+Tente sozinh\@ e por aproximadamente 1\~2 minutos construir o "xpath" (caminho em XML) que nos levaria a este elemento antes de avançar. (Tente sozinh\@ antes de copiar a resposta abaixo!)
+
+A resposta é:
+
+```{xml}
+//h1[@class = 'c-content-head__title']
+```
+
+Usando agora as funções *html_nodes* e *html_text*, como vimos no tutorial anterior, vamos capturar o título da notícia:
+
+```{r}
+node_titulo <- html_nodes(pagina, xpath = "//h1[@class = 'c-content-head__title']")
+titulo <- html_text(node_titulo) %>% 
+    str_squish()
+print(titulo)
+```
+
+Simples, não? Repita agora o mesmo procedimento para o subtítulo (tente sozinh\@ antes de copiar a resposta abaixo!):
+
+```{r}
+node_subtitulo <- html_nodes(pagina, xpath = "//h2[@class = 'c-content-head__subtitle']")
+subtitulo <- html_text(node_subtitulo) %>% 
+    str_squish()
+print(subtitulo)
+```
+
+E agora para a data e hora:
+
+```{r}
+node_datahora <- html_nodes(pagina, xpath = "//div[5]//time")
+datahora <- html_text(node_datahora) %>% 
+  str_squish()
+print(datahora)
+```
+
+Finalmente, peguemos o texto. Note que o texto está dividido em vários parágrafos cujo conteúdo está inseridos em tags "p", todas filhas da tag "article". Se escolhemos o xpath sem especificar a tag "p" ao final, como abaixo, capturamos um monte de "sujeira", como os botões de twitter e facebook. Por esta razão, vamos especificar a tag "div" anterior ao final do xpath. Neste caso, recebemos um vetor contendo cada um dos parágrafos do texto. Precisaríamos "juntar" (concatenar) todos os parágrafos para formar um texto único. Faremos isso a seguir.
+
+```{r}
+node_texto <- html_nodes(pagina, xpath = "//article[@class = 'c-news']//div[5]//p")
+texto <- html_text(node_texto) %>% 
+  str_squish()
+print(texto)
+```
+
+A função *paste* (que é igual *paste0*, mas tem por padrão deixar espaço entre os textos "colados") permite juntarmos todos os textos de um vetor do tipo "character" em um só utilizando o argumento "collapse". Vamos, assim, juntar todos os parágrafos com *paste*. Mas antes, vamos retirar os marcadores de parágrafo que estão "vazios". Quando juntarmos os textos, serão separados por um espaço simples. Por fim, retiraremos tudo que esteja depois do parágrafo que contenha "Recurso exclusivo para assinantes" utilizando a função *str_split* que "separa" o texto em dois vetores dentro de uma lista (e pegamos somente o primeiro elemento). Caso queira ver o que estamos "cortando" do texto, imprima o objeto "texto" antes de executar a função.
+
+```{r}
+texto <- texto[texto!=""]
+texto <- paste(texto, collapse = " ")
+texto <- str_split(texto, "Recurso exclusivo para assinantes")[[1]][1]
+print(texto)
+```
+
+### Tarefa para casa 1: Tente raspar a notícia seguinte na busca da Folha de São Paulo
+
+Tente agora raspar a notícia seguinte usando a mesma estratégia. É fundamental notar que variamos a notícia, mas as informações continuam tendo o mesmo caminho. Essa é a propriedade fundamental do portal raspado que nos permite obter todas as notícias sem nos preocuparmos em abrir uma por uma. O link para a próxima notícia está no objeto "url" abaixo:
+
+```{r}
+url_noticia <- "https://www1.folha.uol.com.br/poder/2021/05/aliados-de-bolsonaro-reforcam-polarizacao-e-atacam-lula-apos-atos-contra-presidente.shtml"
+```
+
+Obs: agora que criarão seus próprios *scripts* com os códigos para raspagem dessa página, não se esqueçam de documentar o que estão fazendo. Isso é muito importante para qualquer pessoa que vá replicar o que fizeram, mas, também, para que consiga entender o que fez mesmo depois de muito tempo. Como muitos pacotes sofrem alterações, inclusive com substituição de funções, isso auxilia a resolver problemas que possam aparecer. Parte importante na programação é deixar claro para você e para os outros o que e o porquê está fazendo cada etapa.
+
+# Um código, duas etapas: raspando várias páginas de notícias sobre coronavírus na Folha de São Paulo
+
+Vamos fazer um breve roteiro do que precisamos fazer para criar um banco de dados que contenha todos os títulos, subtítulos, data e hora e texto das notícias sobre coronavírus da Folha de São Paulo que queremos capturar.
+
+### Etapa 1
+
+-   Passo 1: conhecer a página de busca (e compreender como podemos "passar" de uma página para outra)
+-   Passo 2: raspar (em loop!) as páginas de busca para obter todos os links de notícia
+
+Esta é a primeira etapa da captura. Em primeiro lugar temos que buscar todos os URLs que contêm as notícias buscadas. Em outras palavras, começamos obtendo "em loop" os links das notícias e, só depois de termos os links, obtemos o conteúdo destes links. Nossos passos seguintes, portanto, são:
+
+### Etapa 2
+
+-   Passo 3: conhecer a página da notícia (e ser capaz de obter nela as informações desejadas). Já fizemos isso acima!
+-   Passo 4: raspar (em um novo loop!) o conteúdo dos links capturados no Passo 2.
+
+Vamos construir o código da primeira etapa da captura e, uma vez resolvida a primeira etapa, faremos o código da segunda.
+
+### Código da etapa 1
+
+AVISO: Esse código é o que fizemos no tutorial anterior. Comecemos criando o URL base ***sem*** a numeração de notícias:
+
+```{r}
+url_base <-  "https://search.folha.uol.com.br/search?q=coronavirus&site=todos&periodo=todos&results_count=10000&search_time=0%2C025&url=https%3A%2F%2Fsearch.folha.uol.com.br%2Fsearch%3Fq%3Dcoronavirus%26site%3Dtodos%26periodo%3Dtodos&sr="
+```
+
+Em segundo lugar, vamos observar o URL da página de busca (poderíamos buscar termos chave, mas, neste caso, vamos pegar as notícias relacionadas a coronavírus). Na página 2 da busca vemos que o final é "sr=26". Na página 3 o final é "sr=51". Há um padrão: as buscas são realizadas de 25 em 25. De fato, a 400a. é última página da busca. No entanto, para fins didáticos, pegaremos apenas os 300 primeiros resultados, ou seja, 12 páginas. Para "passarmos" de página em página, portanto, temos que ter um "loop" que conte não mais de 1 até 25, mas na seguinte sequência numérica: {1, 26, 51, 76, ..., 226, 251}.
+
+Precisamos, então, que "i" seja recalculado dentro do loop para coincidir com a numeração da primeira notícia de cada página. Parece difícil, mas é extremamente simples. Veja o loop abaixo, que imprime a sequência desejada multiplicando (i - 1) por 25 e somando 1 ao final. Neste exercício faremos o exercício pensando nas primeiras 300 entradas da busca, então são 12 páginas:
+
+```{r}
+for (i in 1:12){
+  i <- (i - 1) * 25 + 1
+  print(i)
+}
+```
+
+Precisamos agora incluir essas informações nas "instruções do loop". Assim, construímos o url de cada página do resultado da busca:
+
+```{r}
+url_pesquisa <- paste(url_base, 1, sep = "")
+```
+
+A seguir, capturamos o código HTML da página:
+
+```{r}
+pagina <- read_html(url_pesquisa)
+```
+
+Escolhemos apenas os "nodes" que nos interessam:
+
+```{r}
+nodes_titulos <- html_nodes(pagina, xpath = "//h2[@class = 'c-headline__title']")
+nodes_links <- html_nodes(pagina, xpath = "//*[@id='view-view']/div/div/a")
+```
+
+Extraímos os títulos e os links com as funções apropriadas:
+
+```{r}
+titulos <- html_text(nodes_titulos) %>% 
+  str_squish()
+
+links <- html_attr(nodes_links, name = "href")
+links <- unique(links)
+links <- links[!grepl("#foto-", links)]
+```
+
+Perceba que além de dizermos para que o R mantenha apenas os links únicos, utilizamos uma função "diferente de" *grepl*. É uma função para manipulação de texto via expressões regulares e, basicamente, estamos dizendo para manter todos os links que não contenham "\#foto-". Mas qual a razão? Algumas notícias possuem resultados duplicados dentro do sistema de busca da Folha (com o mesmo título) com links diferentes, um direcionado a partir da expressão. Assim, teríamos um link a mais quando comparado ao número de títulos.
+
+Fazendo esse filtro, combinamos os dois vetores em um data frame:
+
+```{r}
+tabela_titulos <- tibble(titulos, links)
+```
+
+Falta "empilhar" o que produziremos em cada iteração do loop de uma forma que facilite a visualização. Criamos um objeto vazio antes do loop.
+
+Usaremos a função *bind_rows* (ou *rbind* se estiver com problemas com o *dplyr*) para combinar data frames. A cada página agora, teremos 25 resultados em uma tabela com duas variáveis. O que queremos é a junção dos 25 resultados de cada uma das 12 páginas.
+
+```{r}
+dados_pesquisa <- tibble()
+dados_pesquisa <- bind_rows(dados_pesquisa, tabela_titulos)
+```
+
+Chegou o momento de colocar dentro loop tudo o que queremos que execute em cada uma das vezes que ele ocorrer. Ou seja, que imprima na tela a página que está executando, que a URL da página de resultados seja construída com a função paste, para todas elas o código HTML seja examinado, lido no R e transformado em objeto XML, colete todos os links e todos os títulos e que "empilhe". Lembrando que não podemos esquecer de definir a URL que estamos usando e criar um data frame vazio para colocar todos os links e títulos coletados antes de iniciar o loop. Vamos pegar as primeiras 300 entradas dos resultados:
+
+```{r}
+url_base <-  "https://search.folha.uol.com.br/search?q=coronavirus&site=todos&periodo=todos&results_count=10000&search_time=0%2C025&url=https%3A%2F%2Fsearch.folha.uol.com.br%2Fsearch%3Fq%3Dcoronavirus%26site%3Dtodos%26periodo%3Dtodos&sr="
+
+dados_pesquisa <- tibble()
+
+for (i in 1:12){
+  
+  print(i)
+
+  x <- (i - 1) * 25 + 1
+  
+  url_pesquisa <- paste(url_base, x, sep = "")
+  
+  pagina <- read_html(url_pesquisa)
+  
+  nodes_titulos <- html_nodes(pagina, xpath = "//h2[@class = 'c-headline__title']")
+  nodes_links <- html_nodes(pagina, xpath = "//*[@id='view-view']/div/div/a")
+
+  titulos <- html_text(nodes_titulos) %>% 
+    str_squish()
+
+  titulos <- unique(titulos)
+  
+  links <- html_attr(nodes_links, name = "href")
+  links <- unique(links)
+  links <- links[!grepl("#foto-", links)]
+  
+  if(length(titulos)!=length(links)){
+  links <- links[!grepl("/galerias/", links)]
+  }
+
+  tabela_titulos <- tibble(titulos, links)
+  
+  dados_pesquisa <- bind_rows(dados_pesquisa, tabela_titulos)
+
+}
+```
+
+Veja que utilizamos um operador relacional ***if*** dentro de nosso loop. Na última página de resultados, temos um link duplicado que foge do padrão que utilizamos em nosso código inicial. Assim, identificamos que o padrão "/galerias/" seria suficiente para diferenciá-lo e aplicamos o filtro com "diferente de" *grepl*. Nossa instrução, com o *if* diz para que execute essa parte do código somente se respeitada a condição dentro do parêntese - se o tamanho do vetor "titulos" for diferente do tamanho do vetor "links".
+
+Agora todos os títulos e links dos resultados das primeiras 12 páginas da busca no site do Folha de São Paulo para o termo "coronavírus" estão em um único banco de dados. Bom trabalho!
+
+### Código da etapa 2
+
+No começo do tutorial resolvemos a captura do título, sutbtítulo, data e hora, e texto para uma única notícia no portal da Folha de São Paulo. Nos resta agora capturar, em loop, o conteúdo de cada uma das páginas cujos links estão guardados no vetor "links".
+
+Vamos rever o procedimento, para uma URL qualquer, da captura do título, data e hora e texto.
+
+```{r}
+url_noticia <- "https://www1.folha.uol.com.br/poder/2021/05/aliados-de-bolsonaro-reforcam-polarizacao-e-atacam-lula-apos-atos-contra-presidente.shtml"
+
+pagina <- read_html(url_noticia)
+
+node_titulo <- html_nodes(pagina, xpath = "//h1[@class = 'c-content-head__title']")
+titulo <- html_text(node_titulo) %>% 
+    str_squish()
+
+node_subtitulo <- html_nodes(pagina, xpath = "//h2[@class = 'c-content-head__subtitle']")
+subtitulo <- html_text(node_subtitulo) %>% 
+    str_squish()
+
+node_datahora <- html_nodes(pagina, xpath = "//div[5]//time")
+datahora <- html_text(node_datahora) %>% 
+  str_squish()
+
+node_texto <- html_nodes(pagina, xpath = "//article[@class = 'c-news']//div[5]//p")
+texto <- html_text(node_texto) %>% 
+  str_squish()
+texto <- texto[texto!=""]
+texto <- paste(texto, collapse = " ")
+texto <- str_split(texto, "Recurso exclusivo para assinantes")[[1]][1] 
+```
+
+Para fazermos a captura de todos os links em "loop" deve ter o seguinte aspecto, como se vê no código abaixo que imprime todos os 300 links cujo conteúdo queremos capturar. Note que a forma de utilizar o loop é ligeiramente diferente da que havíamos visto até então. No lugar de uma variável "i" que "percorre" um vetor numérico (1:27, por exemplo), temos uma variável "link" que recebe, a cada iteração, um endereço URL da notícia, em ordem.
+
+Esses endereços estão armazenados na variável "links" do banco de dados que criamos na Etapa 1, "dados_pesquisa". Assim, na primeira iteração temos que "link" será igual "dados_pesquisa\$links[1]", na segunda "dados_pesquisa\$link[2]" e assim por diante até a última posição do vetor "link" -- no nosso caso a posição 300.
+
+```{r, echo=FALSE}
+for (link in dados_pesquisa$links){
+  print(link)
+}
+```
+
+Combinando os dois código, e criando um data frame "dados_noticias" que é vazio antes do loop temos o código completo da captura. Tal como quando trabalhamos com tabelas, utilizando a função "bind_rows" para combinar o data frame que resultou da iteração anterior com a linha que combina o conteúdo armazenado em "titulo", "datahora" e "texto". Faremos isso para as 100 primeiras notícias por agora, voltaremos mais tarde para buscar de todos.
+
+Obs: Vamos pegar somente as 100 primeiras notícias para ganhar tempo e evitar possíveis erros de exceução relacionados ao acesso à internet que trataremos em outro momento.
+
+```{r}
+dados_noticias <- tibble()
+
+for (link in dados_pesquisa$links[1:100]){
+  
+  print(link)
+  
+  pagina <- read_html(link)
+  node_titulo <- html_nodes(pagina, xpath = "//h1[@class = 'c-content-head__title']")
+  titulo <- html_text(node_titulo) %>%
+    str_squish()
+  
+  if(length(titulo)==0){
+    titulo <- dados_pesquisa$titulos[dados_pesquisa$links==link]
+  }
+  
+  node_subtitulo <- html_nodes(pagina, xpath = "//h2[@class = 'c-content-head__subtitle']")
+  subtitulo <- html_text(node_subtitulo) %>% 
+    str_squish()
+  
+  node_datahora <- html_nodes(pagina, xpath = "//div[5]//time")
+  datahora <- html_text(node_datahora) %>% 
+    str_squish()
+  
+  node_texto <- html_nodes(pagina, xpath = "//article[@class = 'c-news']//div[5]//p")
+  texto <- html_text(node_texto) %>% 
+    str_squish()
+  texto <- texto[texto!=""]
+  texto <- paste(texto, collapse = " ")
+  texto <- str_split(texto, "Recurso exclusivo para assinantes")[[1]][1] 
+  
+  tabela_noticia <- tibble(titulo, subtitulo, datahora, texto)
+  
+  dados_noticias <- bind_rows(dados_noticias, tabela_noticia)
+
+}
+```
+
+O resultado do código é um data frame ("dados_noticias") que contém 4 variáveis em suas colunas: "titulo", "datahora", "link" e "texto". A partir de agora você poderia, por exemplo, usar as ferramentas de "text mining" para criar uma nuvem de palavras ("wordcloud"), fazer a contagem de termos, examinar a semelhança da linguagem usada pelo instituto Folha de São Paulo com a usada por outros institutos de opinião pública, fazer análise de sentimentos, etc.
+
+### Tarefa 2: Comentando o código
+
+Antes disso, sua tarefa é a seguinte: executar ambas as etapas do código e comentá-lo por completo (use \# para inserir linhas de comentário). Comentar o código alheio é uma excelente maneira de ver se você conseguiu compreendê-lo por completo e serve para você voltar ao código no futuro quando for usá-lo de modelo para seus próprios projetos em R.
+
+Dica: Compare o número de obsevações dos dataframes *dados_noticias* e *dados_pesquisa*. O que ocorreu?
+
+```{r}
+
+```
+
+Vocês devem perceber que o número de observações do nosso *data_frame* "dados_noticias" é maior do que no "dados_pesquisa". O que pode ter acontecido?
+
+No geral ocore o contrário. Se observamos o período das notícias capturadas, pode existir uma diferença na estrutura das páginas por esse período ou a estrutura da página pode ser um pouco diferente se é de um blog ou seção especial. Assim, precisamos identificar os nós na página e realizar o mesmo processo. Como já foi frisado, é um processo automatizado com alguns aspectos "artesanais". Mesmo assim o ganho de tempo na execução da tarefa é gigantesco, não?
