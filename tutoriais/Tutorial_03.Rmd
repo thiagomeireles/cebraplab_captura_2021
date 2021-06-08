@@ -1,12 +1,14 @@
 ---
-title: "Tutorial 3: Raspando notícias da Folha"
+title: 'Tutorial 3: Raspando notícias da Folha'
 author: "Thiago Meireles"
 date: "`r format(Sys.time(), '%d/%m/%y')`"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message=FALSE, results='hide')
+knitr::opts_chunk$set(echo = TRUE, message=FALSE)#, results='hide')
 ```
 
 Nas atividades anteriores utilizamos as ferramentas básicas de captura de dados disponíveis na biblioteca *rvest*. Primeiro, vimos como capturar várias tábelas em uma página em formato HTML de uma só vez. Depois, aprendemos como um documento XML está estruturado e que podemos a extrair com precisão os conteúdos de tags e os valores dos atributos das tags de páginas escritas em HTML.
