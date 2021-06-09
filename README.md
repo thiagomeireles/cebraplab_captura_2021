@@ -90,7 +90,7 @@ Os links para os tutoriais estarão abaixo antes de cada aula.
 [Tutorial 4](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_04.md): Captura de notícias do DataFolha\. Versão [Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_04.Rmd) 
 
 [Tutorial 5](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_05.md): Mineração de Texto - pacote *stringr*. Versão [Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_05.Rmd)
-ª
+
 [Tutorial 6](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_06.md): Mineração de Texto - pacote *tm*. Versão [Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_06.Rmd)
 
 [Tutorial 7](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_07.md): Mineração de Texto - pacote *tidytext*. Versão [Rmd](https://github.com/thiagomeireles/cebraplab_captura_2021/blob/main/tutoriais/Tutorial_07.Rmd)
