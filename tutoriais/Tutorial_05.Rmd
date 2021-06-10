@@ -118,7 +118,7 @@ str_locate(noticias_lula, "Lula")
 str_locate_all(noticias_lula, "Lula")
 ```
 
-Finalmente, notemos que os noticias começam sempre mais ou menos da mesma forma. Vamos retirar os 100 primeiros caracteres de cada publicação para observá-los. Usamos a função *str_sub*, semelhante à função *substr*, para extrair um padaço de uma string:
+Finalmente, notemos que os noticias começam sempre mais ou menos da mesma forma. Vamos retirar os 130 primeiros caracteres das 100 primeiras publicações para observá-los. Usamos a função *str_sub*, semelhante à função *substr*, para extrair um padaço de uma string:
 
 ```{r}
 str_sub(noticias[1:100], 1, 130)
